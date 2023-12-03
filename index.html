@@ -13,12 +13,15 @@
     <div class="container">
         <nav>
             <img src="images/Logo.png" class="logo">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">My Services</a></li>
-                <li><a href="#">Contact</a></li>
+            <ul id="sidemenu"> 
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">My Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fas fa-xmark" onclick="closemenu()"></i>
             </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
             <p>Artist and Programmer</p>
@@ -94,26 +97,73 @@
     </div>
 </div>
 <!-------------------portfolio------------->
+<div id="portfolio">
 <div class="portfolio">
     <div class="container">
         <h2 class="sub-title">My Works</h2>
         <div class="work-list">
             <div class="work">
-                <img src="Images/Photo1.jpg">
+                <img src="Images/Photography Works.png">
                 <div class="layer">
-                    <h3> </h3>
+                    <h3>Photos</h3>
+                    <p>Photos I took using a phone and edited them 
+                        using Adobe Lightroom</p>
+                        <a href="#"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
             <div class="work">
-                <img src="Images/Photo2.jpg">
+                <img src="Images/Artworks.png">
+                <div class="layer">
+                    <h3>Artworks</h3>
+                    <p>Traditional and Digital Art, Did a 
+                        little of concept art as well</p>
+                        <a href="#"><i class="fa-solid fa-link"></i></a>
+                </div>
             </div>
             <div class="work">
-                <img src="Images/Photo3.jpg">
+                <img src="Images/Programming.png">
+                <div class="layer">
+                    <h3>Programs</h3>
+                    <p>This are different programs I did using java and python, 
+                       Website designs using HTML and CSS </p>
+                        <a href="#"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn">See more</a>
+    </div>
+</div>
+</div>
+<!----------------Contact------------------------->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-regular fa-paper-plane"></i>contact@example.com</p>
+                <p><i class="fa-solid fa-phone"></i>0123456789</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <a href="" class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-Right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
             </div>
         </div>
     </div>
+    <div class="copyright">
+        <p>Copyright © JayCee. Made with <i class="fa-solid fa-fire"></i> by Easy Tutorials</p>
+    </div>
 </div>
-
 
 
 
@@ -135,5 +185,36 @@
 
 </script>
 
+<script>
+
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+
+
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwySXpu_4lBxFQgSccQYEsfwwgLJS8cYKzaDpvyMMha_tXva7LR8Ng8GbfoZTUwtcEMrg/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message Send Successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },4000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 </body>  
 </html>
